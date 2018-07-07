@@ -6,7 +6,6 @@ const upload = multer({ dest: "uploads/" })
 const postController = require('./controller')
 
 router.post('/', upload.single("image"), (req, res, next) => {
-    // req.body.userId = req.session.userInfo.id
     req.body.imageFile = req.file
 
     postController
@@ -37,6 +36,22 @@ router.get('/:postId/data', (req, res) => {
             console.log(data)
             res.send(data.image)
         })
+})
+
+router.delete('/:postId', (req, res) => {
+    postController
+        .deletePost(req.params.postId)
+        .then(data => res.send(data))
+        .catch(err => console.log(err))
+})
+
+router.patch('/:postId', (req, res) => {
+    postController
+        .updatePost(req.params.id, req.body)
+        .then(data => {
+            console.log(data)
+            res.send(data)})
+        .catch(err => console.log(err))
 })
 
 

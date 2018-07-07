@@ -64,9 +64,30 @@ const getImageData = id =>
       .catch(err => reject(err));
   });
 
+const deletePost = id => 
+  new Promise((resolve, reject) => {
+      postModel
+        .findById({_id: id})
+        .update({active: false})
+        .then(data => resolve({id: data}))
+        .catch(err => console.log(err))
+  })
+
+const updatePost = (id, obj) =>
+    new Promise((resolve, reject) => {
+    postModel
+        .findOneAndUpdate({ _id: id, active: true }, { $set: obj })
+        .then(data => {
+            console.log(data)
+            resolve(data)})
+        .catch(err => reject(err))
+    })
+
 module.exports = {
     createPost,
     getAllPosts,
     getPost,
-    getImageData
+    getImageData,
+    deletePost,
+    updatePost
 }
