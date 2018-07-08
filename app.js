@@ -8,6 +8,7 @@ const bodyParser = require('body-parser');
 
 const UserApiRouter = require('./modules/api/users/router')
 const LoginApi = require('./modules/api/auth/router')
+const postRouter = require('./modules/api/post/router')
 
 
 mongoose.connect("mongodb://admin:123a123a@ds125181.mlab.com:25181/exchangememories", function () {
@@ -55,6 +56,10 @@ app.use(
 app.get("/", (req, res) => {
     res.send("Hello")
 })
+
+app.use('/api/post', postRouter)
+
+app.use(express.static('./public'));
 
 const port = process.env.PORT || 3000
 
