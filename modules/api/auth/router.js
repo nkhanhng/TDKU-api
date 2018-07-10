@@ -4,13 +4,15 @@ const Router = express.Router();
 const authController = require('./controller');
 
 Router.post("/",(req,res)=>{
-    authController.login(req.body).then(userInfo => {
-                      req.session.userInfo =userInfo,
+    authController.login(req.body)
+                  .then(userInfo => {
+                      req.session.userInfo = userInfo;
                       res.send({
                           success: 1,
                           user: userInfo
                       })
-                  }).catch(err => res.status(err.statusCode).json({err: err}))
+                  })
+                  .catch(err => console.log(err))
 })
 
 // Router.get("/",(req,res)=>{

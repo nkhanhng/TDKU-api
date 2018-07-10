@@ -18,6 +18,18 @@ mongoose.connect("mongodb://admin:123a123a@ds125181.mlab.com:25181/exchangememor
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json({ extended: false }));
 
+app.use(
+    session({
+        secret: config.sessionSecret,
+        resave: false,
+        saveUninitialized: false,
+        cookie: {
+            secure: config.secureCookie,
+            maxAge: 12 * 60 * 60 * 1000
+        }
+    })
+);
+
 app.use('/api/users',UserApiRouter)
 app.use('/api/auth',LoginApi)
 
@@ -41,17 +53,7 @@ app.use((req, res, next) => {
     next();
 });
 
-app.use(
-    session({
-        secret: config.sessionSecret,
-        resave: false,
-        saveUninitialized: false,
-        cookie: {
-            secure: config.secureCookie,
-            maxAge: 12 * 60 * 60 * 1000
-        }
-    })
-);
+
 
 app.get("/", (req, res) => {
     res.send("Hello")
