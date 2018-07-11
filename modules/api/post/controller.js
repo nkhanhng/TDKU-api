@@ -19,7 +19,7 @@ const getAllPosts = () =>
     new Promise((resolve, reject) => {
         postModel
             .find({active: true})
-            .select("_id title image description")
+            .select("_id title description")
             .exec()
             .then(data => {
                 resolve(data.map(img =>

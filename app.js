@@ -32,6 +32,7 @@ app.use(
 
 app.use('/api/users',UserApiRouter)
 app.use('/api/auth',LoginApi)
+app.use('/api/post', postRouter)
 
 app.use((req, res, next) => {
     res.setHeader("X-Frame-Options", "ALLOWALL");
@@ -59,10 +60,8 @@ app.get("/", (req, res) => {
     res.send("Hello")
 })
 
-app.use('/api/post', postRouter)
-
 app.use(express.static('./public'));
 
 const port = process.env.PORT || 3000
 
-app.listen(port)
+app.listen(port, console.log("Listening at " + port))
