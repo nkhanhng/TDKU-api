@@ -52,7 +52,7 @@ app.use(
 
 app.use('/api/users',UserApiRouter)
 app.use('/api/auth',LoginApi)
-app.use('/api/posts', postRouter)
+app.use('/api/post', postRouter)
 
 app.use((req, res, next) => {
     res.setHeader("X-Frame-Options", "ALLOWALL");

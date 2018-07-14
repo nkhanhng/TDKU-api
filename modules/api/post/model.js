@@ -11,10 +11,10 @@ const PostSchema = new Schema({
     contentType: {type: String, required: true},
     title: {type: String, required: true},
     description: {type: String, required: true},
+    createBy: {type: String, required: true},
     like: {type: Number, default: 0},
     active: {type: Boolean, default: true},
-    comment: {type: [commentSchema], default: []},
-    createBy: {type: Schema.Types.ObjectId, ref: "users", required: true}
+    comment: {type: [commentSchema], default: []}
 })
 
 module.exports = mongoose.model('posts', PostSchema)

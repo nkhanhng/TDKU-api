@@ -15,8 +15,14 @@ Router.post("/",(req,res)=>{
                   .catch(err => console.log(err))
 })
 
-// Router.get("/",(req,res)=>{
-//     res.send(req.session.userInfo);
-// })
+Router.get("/", (req, res) => {
+    res.send(req.session.userInfo)
+})
+  
+Router.delete("/", (req, res) => {
+    req.session.destroy();
+    res.send("Logged out");
+})
+  
 
 module.exports = Router;
