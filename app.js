@@ -11,8 +11,28 @@ const LoginApi = require('./modules/api/auth/router')
 const postRouter = require('./modules/api/post/router')
 
 
+app.use((req, res, next) => {
+    res.setHeader("X-Frame-Options", "ALLOWALL");
+    res.setHeader(
+      "Access-Control-Allow-Methods",
+      "POST, GET, PUT, DELETE, OPTIONS"
+    );
+  
+    if (req.headers.origin) {
+      res.setHeader("Access-Control-Allow-Origin", req.headers.origin);
+    }
+  
+    res.setHeader("Access-Control-Allow-Credentials", true);
+  
+    res.setHeader(
+      "Access-Control-Allow-Headers",
+      "Authorization, Origin, X-Requested-With, Content-Type, Accept"
+    );
+    next();
+  });
+
 mongoose.connect("mongodb://admin:123a123a@ds125181.mlab.com:25181/exchangememories", function () {
-    console.log("connect success")
+    console.log("Connected success")
 })
 
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -62,6 +82,6 @@ app.get("/", (req, res) => {
 
 app.use(express.static('./public'));
 
-const port = process.env.PORT || 3000
+const port = process.env.PORT || 6969
 
 app.listen(port, console.log("Listening at " + port))

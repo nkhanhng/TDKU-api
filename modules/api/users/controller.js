@@ -1,15 +1,18 @@
 const UserModel = require('./users');
+const fs = require('fs')
 
-const createUser = ({ username, password, email }) => new Promise((resolve, reject)=>{
-    UserModel
-        .create({
-            username: username,
-            password: password,
-            email: email
-        })
-        .then(userCreated => resolve(userCreated._id))
-        .catch(err => reject(err));
-})
+const createUser = ({ username, password, email }) => 
+    new Promise((resolve, reject) => {
+        UserModel
+            .create({
+                username: username,
+                password: password,
+                email: email
+            })
+            .then(userCreated => resolve(userCreated._id))
+            .catch(err => reject(err))
+    })
+
 
 const updateUser = (userId,{email,avatar,password}) => new Promise((resolve,reject)=>{
     UserModel.findById(userId)

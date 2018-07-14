@@ -14,7 +14,7 @@ const PostSchema = new Schema({
     like: {type: Number, default: 0},
     active: {type: Boolean, default: true},
     comment: {type: [commentSchema], default: []},
-    // createBy: {type: Schema.Types.ObjectId, ref: "users", required: true}
+    createBy: {type: Schema.Types.ObjectId, ref: "users", required: true}
 })
 
 module.exports = mongoose.model('posts', PostSchema)

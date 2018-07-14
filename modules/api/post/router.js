@@ -6,6 +6,7 @@ const upload = multer({ dest: "uploads/" })
 const postController = require('./controller')
 
 router.post('/', upload.single("image"), (req, res, next) => {
+    console.log(req.body)
     req.body.imageFile = req.file
 
     postController

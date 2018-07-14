@@ -3,7 +3,7 @@ const Router = express.Router();
 
 const UserController = require('./controller')
 
-Router.get("/:id",(req,res)=>{
+Router.get("/:id", (req,res)=>{
     let id = req.params.id
     UserController.getUser(id)
                   .then(user => res.send({success:1,user}))
@@ -13,16 +13,18 @@ Router.get("/:id",(req,res)=>{
                   })
 })
 
-Router.post("/create",(req,res)=>{
-    UserController.createUser(req.body)
-                  .then(userCreated => res.status(201).send({success:1, user:userCreated}))
-                  .catch(err => {
-                      console.log(err);
-                      res.status(500).send({success:0,errMsg:err})
-                  })
+Router.post("/", (req ,res) => {
+    console.log(req.body)
+    UserController
+        .createUser(req.body)
+        .then(userCreated => res.status(201).send({success:1, user:userCreated}))
+        .catch(err => {
+            console.log(err);
+            res.status(500).send({success:0,errMsg:err})
+        })
 })
 
-Router.put("/:id",(req,res)=>{
+Router.put("/:id", (req,res)=>{
     UserController.updateUser(req.params.id)
                   .then(user => res.status(201).send({success:1,user}))
                   .catch(err =>{
