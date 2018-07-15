@@ -9,7 +9,7 @@ const bodyParser = require('body-parser');
 const UserApiRouter = require('./modules/api/users/router')
 const LoginApi = require('./modules/api/auth/router')
 const postRouter = require('./modules/api/post/router')
-
+const tradeRouter = require('./modules/api/trade/router')
 
 app.use((req, res, next) => {
     res.setHeader("X-Frame-Options", "ALLOWALL");
@@ -53,6 +53,7 @@ app.use(
 app.use('/api/users',UserApiRouter)
 app.use('/api/auth',LoginApi)
 app.use('/api/post', postRouter)
+app.use('/api/trade', tradeRouter)
 
 app.use((req, res, next) => {
     res.setHeader("X-Frame-Options", "ALLOWALL");

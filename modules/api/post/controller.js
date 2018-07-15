@@ -19,12 +19,12 @@ const getAllPosts = () =>
     new Promise((resolve, reject) => {
         postModel
             .find({active: true})
-            .select("_id title description")
+            .select("_id title description createBy")
             .exec()
             .then(data => {
                 resolve(data.map(img =>
                     Object.assign({}, img._doc, {
-                        imageUrl: `/api/posts/${img._id}/data`
+                        imageUrl: `/api/post/${img._id}/data`
                     })
                 ))
             })
