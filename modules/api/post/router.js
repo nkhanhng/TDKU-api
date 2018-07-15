@@ -34,7 +34,7 @@ router.get('/:postId/data', (req, res) => {
         .getImageData(req.params.postId)
         .then(data => {
             res.contentType(data.contentType)
-            console.log(data)
+            // console.log(data)
             res.send(data.image)
         })
 })
