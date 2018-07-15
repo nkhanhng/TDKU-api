@@ -15,7 +15,8 @@ const userSchema = new Schema({
                 message: "{VALUE} is not a valid email address!"
             }
     },
-    avatar: {type: Buffer}
+    avatar: {type: Buffer},
+    // contentType: {type: String, required: true}
 })
 
 userSchema.pre("save", function(next){
